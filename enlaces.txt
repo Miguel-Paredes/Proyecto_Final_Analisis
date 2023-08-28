@@ -1,0 +1,10 @@
+https://www.kaggle.com/datasets/tanmoyx/covid19-patient-precondition-dataset
+https://www.kaggle.com/datasets/rosenfas/medalhas-nas-olimpadas-com-dados-socioeconmicos
+https://www.kaggle.com/datasets/surajjha101/countries-olympics-medals-since-1896
+https://www.kaggle.com/datasets/mrhell/list-of-hobbies
+https://www.kaggle.com/datasets/gauravduttakiit/hobby-classification
+https://www.kaggle.com/datasets/giottomillan/reviews-videogames
+https://www.kaggle.com/datasets/davidjhonatan/videojuegos
+https://www.kaggle.com/datasets/smid80/coronavirus-covid19-tweets
+https://www.kaggle.com/datasets/themrityunjaypathak/covid-cases-and-deaths-worldwide
+https://www.kaggle.com/datasets/albertomacasalcibar/twicth-videogames-and-chat
