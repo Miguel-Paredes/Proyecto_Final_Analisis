@@ -7,4 +7,6 @@ https://www.kaggle.com/datasets/giottomillan/reviews-videogames
 https://www.kaggle.com/datasets/davidjhonatan/videojuegos
 https://www.kaggle.com/datasets/smid80/coronavirus-covid19-tweets
 https://www.kaggle.com/datasets/themrityunjaypathak/covid-cases-and-deaths-worldwide
-https://www.kaggle.com/datasets/albertomacasalcibar/twicth-videogames-and-chat
+https://www.kaggle.com/datasets/secareanualin/football-events
+https://www.kaggle.com/datasets/elenapretelfernndez/tfg-conjunto-de-datos
+https://www.kaggle.com/datasets/arnabchaki/popular-video-games-1980-2023
