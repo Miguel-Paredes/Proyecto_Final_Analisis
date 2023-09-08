@@ -9,12 +9,14 @@ from pyravendb.store import document_store<br>
 from couchdb import Server<br>
 
 ## Transformacion del CSV a Json
-<pre>    
+<pre>   
 a = pd.read_csv('chat.csv')<br>
 csv_data = pd.read_csv("chat.csv", sep = ",")<br>
 csv_data.to_json("chat.json", orient = "records")<br>
 </pre>
+
 ## Enviar los archivos Json a Couchdb
+<pre>
 couch = couchdb.Server('http://admin:admin@localhost:5984')<br>
 db_name = 'chat' #los nombres de las bases de datos deben ser en minusculas y con guiones bajos para los espacios<br>
 if db_name in couch:<br>
@@ -46,20 +48,24 @@ for doc in documentos_mongodb:<br>
     doc['mensaje'] = 'Este documento fue extraído de MongoDB' #se agrega un mensaje para indicar que el archivo es extraido de Mongodb<br>
     del doc['_id'] #se elimina el id de mongo para que no entre en conflicto con el id de couchdb<br>
     db.save(doc)<br>
+</pre>
 
 ## Enviar Json a Raven
 ### Configuración de RavenDB
+<pre>
 ravendb_url = "http://localhost:8080"<br>
 database_name = "Analisis"<br>
 store = document_store.DocumentStore(urls=[ravendb_url], database=database_name)<br>
 store.initialize()<br>
-
+</pre>
 ### Clase Country
+<pre>
 class Country:<br>
     def __init__(self, **kwargs):<br>
         self.__dict__.update(kwargs)<br>
-
+</pre>
 ### Función para cargar datos de CSV a RavenDB
+<pre>
 def csv_to_ravendb(csv_file, entity_class):<br>
     with open(csv_file, 'r', encoding='utf-8') as file:<br>
         reader = csv.DictReader(file)<br>
@@ -72,23 +78,27 @@ def csv_to_ravendb(csv_file, entity_class):<br>
                 print(f"Documento {entity.__dict__} subido exitosamente a RavenDB.")<br>
             except Exception as e:<br>
                 print(f"Error al subir el documento {entity.__dict__} a RavenDB: {e}")<br>
-
+</pre>
 ### Archivo CSV y clase para los datos
+<pre>
 csv_file = 'final_train_output.csv'<br>
 entity_class = Country<br>
-
+</pre>
 ### Cargar datos del CSV a RavenDB
+<pre>
 csv_to_ravendb(csv_file, entity_class)<br>
+</pre>
 
 ## Transferir datos de RavenDB a CouchDB
-
 ### Configuración de CouchDB
+<pre>
 couchdb_url = "http://admin:admin@localhost:5984/"<br>
 database_name_couch = "olympics_medals_country_wise"<br>
 couch = couchdb.Server(couchdb_url)<br>
 couchdb_database = couch.get(database_name_couch, None) or couch.create(database_name_couch)<br>
-
+</pre>
 ### Función para transferir datos de RavenDB a CouchDB
+<pre>
 def transfer_data_raven_to_couch(entity_class, couchdb_database):<br>
     with store.open_session() as raven_session:<br>
         entities = list(raven_session.query(entity_class))<br>
@@ -99,4 +109,4 @@ def transfer_data_raven_to_couch(entity_class, couchdb_database):<br>
 if __name__ == "__main__":<br>
     transfer_data_raven_to_couch(entity_class, couchdb_database)<br>
     print("Transferencia de datos completada.")<br>
-
+</pre>
