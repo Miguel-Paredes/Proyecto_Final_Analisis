@@ -2,12 +2,13 @@
 ## Integrantes
 Cataña Dennis, Cocha Iveth, Lascano David, Paredes Miguel, Simba Cristian
 ## Librerias a utilizar
+<pre> 
 import pandas as pd, couchdb, json, os, csv<br>
 import pymongo<br>
 from pymongo import MongoClient<br>
 from pyravendb.store import document_store<br>
 from couchdb import Server<br>
-
+</pre> 
 ## Transformacion del CSV a Json
 <pre>   
 a = pd.read_csv('chat.csv')<br>
@@ -28,16 +29,18 @@ with open(archivo_json) as archivo:<br>
     datos_json = json.load(archivo)<br>
 for documento in datos_json:<br>
     db.update([documento])<br>
-
+</pre> 
 ## Enviar los archivos Json a Mongodb
+<pre> 
 client = MongoClient('localhost', 27017)<br>
 db = client['Analisis']<br>
 collection = db['covid_worldwide']<br>
 with open('covid_worldwide.json', 'r') as file:<br>
     data = json.load(file)<br>
 result = collection.insert_many(data)<br>
-
-## Enviar los archivos Json de Mongodb a Couchdb<br>
+</pre> 
+## Enviar los archivos Json de Mongodb a Couchdb
+<pre> 
 client_mongodb = pymongo.MongoClient('localhost', 27017)<br>
 db_mongodb = client_mongodb['Analisis']<br>
 coleccion_mongodb = db_mongodb['sample_submission']<br>
