@@ -47,96 +47,55 @@ for doc in documentos_mongodb:<br>
     db.save(doc)<br>
 
 ## Enviar Json a Raven
+### Configuración de RavenDB
 ravendb_url = "http://localhost:8080"<br>
 database_name = "Analisis"<br>
-store = document_store.DocumentStore(urls=[ravendb_url], database=database_name)
-store.initialize()
-class Country:
-    def __init__(self, series_id, country_code, country_name, year, value, name, gold_medals, silver_medals, bronze_medals):
-        self.series_id = series_id
-        self.country_code = country_code
-        self.country_name = country_name
-        self.year = year
-        self.value = value
-        self.name = name
-        self.gold_medals = gold_medals
-        self.silver_medals = silver_medals
-        self.bronze_medals = bronze_medals
-def csv_to_ravendb(csv_file):
-    with open(csv_file, 'r', encoding='utf-8') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            country = Country(series_id=row['series_id'], country_code=row['country_code'],
-                              country_name=row['country_name'], year=row['year'], value=row['value'],
-                              name=row['name'], gold_medals=row['gold_medals'], silver_medals=row['silver_medals'],
-                              bronze_medals=row['bronze_medals'])
-            try:
-                with store.open_session() as session:
-                    session.store(country)
-                    session.save_changes()
-                print(f"Documento {country.__dict__} subido exitosamente a RavenDB.")
-            except Exception as e:
-                print(f"Error al subir el documento {country.__dict__} a RavenDB: {e}")
-csv_file = 'final_train_output.csv'
-csv_to_ravendb(csv_file)
+store = document_store.DocumentStore(urls=[ravendb_url], database=database_name)<br>
+store.initialize()<br>
 
-## Enviar los archivos Json de Raven a Couchdb
-import csv
-from pyravendb.store import document_store
-import couchdb
-ravendb_url = "http://localhost:8080"
-database_name_raven = "olympics_medals_country_wise"
-raven_store = document_store.DocumentStore(urls=[ravendb_url], database=database_name_raven)
-raven_store.initialize()
-couchdb_url = "http://admin:admin@localhost:5984/"
-database_name_couch = "olympics_medals_country_wise"
-couch = couchdb.Server(couchdb_url)
-if database_name_couch in couch:
-    couchdb_database = couch[database_name_couch]
-else:
-    couchdb_database = couch.create(database_name_couch)
-class Country:
-    def __init__(self, countries, ioc_code, summer_participations, summer_gold, summer_silver, summer_bronze, summer_total, winter_participations, winter_gold, winter_silver, winter_bronze, winter_total, total_participation, total_gold, total_silver, total_bronze, total_total):
-        self.countries = countries
-        self.ioc_code = ioc_code
-        self.summer_participations = summer_participations
-        self.summer_gold = summer_gold
-        self.summer_silver = summer_silver
-        self.summer_bronze = summer_bronze
-        self.summer_total = summer_total
-        self.winter_participations = winter_participations
-        self.winter_gold = winter_gold
-        self.winter_silver = winter_silver
-        self.winter_bronze = winter_bronze
-        self.winter_total = winter_total
-        self.total_participation = total_participation
-        self.total_gold = total_gold
-        self.total_silver = total_silver
-        self.total_bronze = total_bronze
-        self.total_total = total_total
-def transfer_data_raven_to_couch():
-    with raven_store.open_session() as raven_session:
-        countries = list(raven_session.query(Country))
-        for country in countries:
-            country_data = {
-                'countries': country.countries,
-                'ioc_code': country.ioc_code,
-                'summer_participations': country.summer_participations,
-                'summer_gold': country.summer_gold,
-                'summer_silver': country.summer_silver,
-                'summer_bronze': country.summer_bronze,
-                'summer_total': country.summer_total,
-                'winter_participations': country.winter_participations,
-                'winter_gold': country.winter_gold,
-                'winter_silver': country.winter_silver,
-                'winter_bronze': country.winter_bronze,
-                'winter_total': country.winter_total,
-                'total_participation': country.total_participation,
-                'total_gold': country.total_gold,
-                'total_silver': country.total_silver,
-                'total_bronze': country.total_bronze,
-                'total_total': country.total_total}
-            couchdb_database.save(country_data)
-if __name__ == "__main__":
-    transfer_data_raven_to_couch()
-    print("Transferencia de datos completada.")
+### Clase Country
+class Country:<br>
+    def __init__(self, **kwargs):<br>
+        self.__dict__.update(kwargs)<br>
+
+### Función para cargar datos de CSV a RavenDB
+def csv_to_ravendb(csv_file, entity_class):<br>
+    with open(csv_file, 'r', encoding='utf-8') as file:<br>
+        reader = csv.DictReader(file)<br>
+        for row in reader:<br>
+            entity = entity_class(**row)<br>
+            try:<br>
+                with store.open_session() as session:<br>
+                    session.store(entity)<br>
+                    session.save_changes()<br>
+                print(f"Documento {entity.__dict__} subido exitosamente a RavenDB.")<br>
+            except Exception as e:<br>
+                print(f"Error al subir el documento {entity.__dict__} a RavenDB: {e}")<br>
+
+### Archivo CSV y clase para los datos
+csv_file = 'final_train_output.csv'<br>
+entity_class = Country<br>
+
+### Cargar datos del CSV a RavenDB
+csv_to_ravendb(csv_file, entity_class)<br>
+
+## Transferir datos de RavenDB a CouchDB
+
+### Configuración de CouchDB
+couchdb_url = "http://admin:admin@localhost:5984/"<br>
+database_name_couch = "olympics_medals_country_wise"<br>
+couch = couchdb.Server(couchdb_url)<br>
+couchdb_database = couch.get(database_name_couch, None) or couch.create(database_name_couch)<br>
+
+### Función para transferir datos de RavenDB a CouchDB
+def transfer_data_raven_to_couch(entity_class, couchdb_database):<br>
+    with store.open_session() as raven_session:<br>
+        entities = list(raven_session.query(entity_class))<br>
+        for entity in entities:<br>
+            entity_data = {k: getattr(entity, k) for k in dir(entity) if not k.startswith('_')}<br>
+            couchdb_database.save(entity_data)<br>
+
+if __name__ == "__main__":<br>
+    transfer_data_raven_to_couch(entity_class, couchdb_database)<br>
+    print("Transferencia de datos completada.")<br>
+
