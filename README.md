@@ -7,7 +7,7 @@ import pymongo<br>
 from pymongo import MongoClient<br>
 from pyravendb.store import document_store<br>
 from couchdb import Server<br>
-
+<pre>    
 ## Transformacion del CSV a Json
 a = pd.read_csv('chat.csv')<br>
 csv_data = pd.read_csv("chat.csv", sep = ",")<br>
@@ -17,7 +17,7 @@ csv_data.to_json("chat.json", orient = "records")<br>
 couch = couchdb.Server('http://admin:admin@localhost:5984')<br>
 db_name = 'chat' #los nombres de las bases de datos deben ser en minusculas y con guiones bajos para los espacios<br>
 if db_name in couch:<br>
-<pre>    db = couch[db_name]<br>
+db = couch[db_name]<br>
 else:<br>
     db = couch.create(db_name)<br>
 archivo_json = 'chat 2.json'<br>
