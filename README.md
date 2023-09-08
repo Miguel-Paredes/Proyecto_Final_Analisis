@@ -17,7 +17,7 @@ csv_data.to_json("chat.json", orient = "records")<br>
 couch = couchdb.Server('http://admin:admin@localhost:5984')<br>
 db_name = 'chat' #los nombres de las bases de datos deben ser en minusculas y con guiones bajos para los espacios<br>
 if db_name in couch:<br>
-    db = couch[db_name]<br>
+<pre>    db = couch[db_name]<br>
 else:<br>
     db = couch.create(db_name)<br>
 archivo_json = 'chat 2.json'<br>
