@@ -2,11 +2,11 @@
 ## Integrantes
 Cataña Dennis, Cocha Iveth, Lascano David, Paredes Miguel, Simba Cristian
 ## Librerias a utilizar
-import pandas as pd, couchdb, json, os, csv
-import pymongo
-from pymongo import MongoClient
-from pyravendb.store import document_store
-from couchdb import Server
+import pandas as pd, couchdb, json, os, csv<br>
+import pymongo<br>
+from pymongo import MongoClient<br>
+from pyravendb.store import document_store<br>
+from couchdb import Server<br>
 
 ## Transformacion del CSV a Json
 a = pd.read_csv('chat.csv')
