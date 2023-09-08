@@ -9,46 +9,46 @@ from pyravendb.store import document_store<br>
 from couchdb import Server<br>
 
 ## Transformacion del CSV a Json
-a = pd.read_csv('chat.csv')
-csv_data = pd.read_csv("chat.csv", sep = ",")
-csv_data.to_json("chat.json", orient = "records")
+a = pd.read_csv('chat.csv')<br>
+csv_data = pd.read_csv("chat.csv", sep = ",")<br>
+csv_data.to_json("chat.json", orient = "records")<br>
 
 ## Enviar los archivos Json a Couchdb
-couch = couchdb.Server('http://admin:admin@localhost:5984')
-db_name = 'chat' #los nombres de las bases de datos deben ser en minusculas y con guiones bajos para los espacios
-if db_name in couch:
-    db = couch[db_name]
-else:
-    db = couch.create(db_name)
-archivo_json = 'chat 2.json'
-with open(archivo_json) as archivo:
-    datos_json = json.load(archivo)
-for documento in datos_json:
-    db.update([documento])
+couch = couchdb.Server('http://admin:admin@localhost:5984')<br>
+db_name = 'chat' #los nombres de las bases de datos deben ser en minusculas y con guiones bajos para los espacios<br>
+if db_name in couch:<br>
+    db = couch[db_name]<br>
+else:<br>
+    db = couch.create(db_name)<br>
+archivo_json = 'chat 2.json'<br>
+with open(archivo_json) as archivo:<br>
+    datos_json = json.load(archivo)<br>
+for documento in datos_json:<br>
+    db.update([documento])<br>
 
 ## Enviar los archivos Json a Mongodb
-client = MongoClient('localhost', 27017)
-db = client['Analisis']
-collection = db['covid_worldwide']
-with open('covid_worldwide.json', 'r') as file:
-    data = json.load(file)
-result = collection.insert_many(data)
+client = MongoClient('localhost', 27017)<br>
+db = client['Analisis']<br>
+collection = db['covid_worldwide']<br>
+with open('covid_worldwide.json', 'r') as file:<br>
+    data = json.load(file)<br>
+result = collection.insert_many(data)<br>
 
-## Enviar los archivos Json de Mongodb a Couchdb
-client_mongodb = pymongo.MongoClient('localhost', 27017)
-db_mongodb = client_mongodb['Analisis']
-coleccion_mongodb = db_mongodb['sample_submission']
-server = couchdb.Server('http://admin:admin@127.0.0.1:5984/')
-db = server['sample_submission']
-documentos_mongodb = coleccion_mongodb.find()
-for doc in documentos_mongodb:
-    doc['mensaje'] = 'Este documento fue extraído de MongoDB' #se agrega un mensaje para indicar que el archivo es extraido de Mongodb
-    del doc['_id'] #se elimina el id de mongo para que no entre en conflicto con el id de couchdb
-    db.save(doc)
+## Enviar los archivos Json de Mongodb a Couchdb<br>
+client_mongodb = pymongo.MongoClient('localhost', 27017)<br>
+db_mongodb = client_mongodb['Analisis']<br>
+coleccion_mongodb = db_mongodb['sample_submission']<br>
+server = couchdb.Server('http://admin:admin@127.0.0.1:5984/')<br>
+db = server['sample_submission']<br>
+documentos_mongodb = coleccion_mongodb.find()<br>
+for doc in documentos_mongodb:<br>
+    doc['mensaje'] = 'Este documento fue extraído de MongoDB' #se agrega un mensaje para indicar que el archivo es extraido de Mongodb<br>
+    del doc['_id'] #se elimina el id de mongo para que no entre en conflicto con el id de couchdb<br>
+    db.save(doc)<br>
 
 ## Enviar Json a Raven
-ravendb_url = "http://localhost:8080"
-database_name = "Analisis"
+ravendb_url = "http://localhost:8080"<br>
+database_name = "Analisis"<br>
 store = document_store.DocumentStore(urls=[ravendb_url], database=database_name)
 store.initialize()
 class Country:
