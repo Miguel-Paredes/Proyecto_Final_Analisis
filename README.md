@@ -1,6 +1,15 @@
 # Proyecto_Final_Analisis
 ## Integrantes
 Cataña Dennis, Cocha Iveth, Lascano David, Paredes Miguel, Simba Cristian
+
+## Enlaces de los videos
+### Video 1
+https://www.youtube.com/watch?v=UKLx3EWgwZQ
+<br>
+### Video 2
+https://www.youtube.com/watch?v=vCOlyQrXaU4
+<br>
+
 ## Librerias a utilizar
 <pre> 
 import pandas as pd, couchdb, json, os, csv<br>
