@@ -10,7 +10,7 @@ https://www.youtube.com/watch?v=UKLx3EWgwZQ
 https://www.youtube.com/watch?v=vCOlyQrXaU4
 <br>
 
-##Enlace casos de estudio
+## Enlace casos de estudio
 https://app.powerbi.com/groups/me/reports/da9174b8-daae-4f4b-8ebc-c324bb741555/ReportSection77dfc5e0673f4e73d361?experience=power-bi
 
 ## Librerias a utilizar
