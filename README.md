@@ -26,7 +26,7 @@ from pymongo import MongoClient<br>
 from pyravendb.store import document_store<br>
 from couchdb import Server<br>
 </pre> 
-<br>Uso:
+<br>**Uso:**
 + **pandas:** Manipula y análiza de Datos 
 + **json, os, csv:** json trabaja con datos en formato JSON (JavaScript Object Notation),"os" proporciona funciones para interactuar con el sistema operativo, "csv" trabaja con archivos CSV (Comma-Separated Values), que son un formato común para el almacenamiento de datos tabulares
 + **pymongo:** Biblioteca para interactuar con bases de datos MongoDB
@@ -41,6 +41,8 @@ a = pd.read_csv('chat.csv')<br>
 csv_data = pd.read_csv("chat.csv", sep = ",")<br>
 csv_data.to_json("chat.json", orient = "records")<br>
 </pre>
+<br>**Explicación:**
+<br>La primera línea lee el archivo csv y los amacena temporalmente en la variable _a_.Esta variable es leída en la segunda línea, con el objetivo de separa los campos con una "_,_". Para finalemnte tomar el archivo csv y convertirlo en un archivo _json_, al cual le daremos un nombre.
 
 ## Enviar los archivos Json a Couchdb
 <pre>
