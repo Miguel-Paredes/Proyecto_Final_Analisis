@@ -94,10 +94,10 @@ for doc in documentos_mongodb:<br>
 <br>**Explicación:**
 1. Especificamos en cliente (usuario)  desde donde se enviará los datos de Mongo, de igual manera seleccionamos la Base de datos que contiene la colección donde se encuentran nuestros datos a envia.
 2.  Establecemos la ubicación del usuario quién recibe los datos desde Mongo; seleccionamos la Base de datos que contendrá la informacióncontiene la colección donde se encuentran nuestros datos a envia.
-3. _documentos_mongodb = coleccion_mongodb.find()_  Recupera todos los documentos de la colección en MongoDB utilizando el método find().
-4. 
+3. _documentos_mongodb = coleccion_mongodb.find()_  Recupera todos los documentos de la colección en MongoDB utilizando el método find(). Estos documentos son iterados dentro del "_for_", para asi poder ir agregando uno por uno dentro de la base de Couch
+<br>***Nota:***
+<br> Los archivos de Mongo ya contenian un ID que los diferenciaba, este Id tuvo que ser eliminado al momento de importar desde Mongo hacia Couch, porque Cocuh identificada ese ID como un campo propio y pordua errores al moento de abrir el archivo.
 
-for doc in documentos_mongodb:: Inicia un bucle que itera a través de cada documento en la colección MongoDB.
 
 ## Enviar Json a Raven
 ### Configuración de RavenDB
@@ -107,12 +107,18 @@ database_name = "Analisis"<br>
 store = document_store.DocumentStore(urls=[ravendb_url], database=database_name)<br>
 store.initialize()<br>
 </pre>
+<br>**Explicación:**
+<br>Configura un grupo de documentos para trabajar con una base de datos RavenDB al  definir la URL del servidor RavenDB,se identifica la base con la cual se va atrabajar. Luego en la tercera línea se crea un objeto del grupo de documentos utilizando la clase DocumentStore de la biblioteca PyRavenDB, para finalmete establecer la conexión con el servidor.
+
 ### Clase Country
 <pre>
 class Country:<br>
     def __init__(self, **kwargs):<br>
         self.__dict__.update(kwargs)<br>
 </pre>
+<br>**Explicación:**
+<br>Representa la creación de la clase que contendrá los archivos atributos relacionados con información, para luego almacenar dicha información en forma de diccionarios de python con el fin de que se almacenen dinámicamente y asi poder agregar o modificar los campos en un objeto en tiempo de ejecución establecido
+
 ### Función para cargar datos de CSV a RavenDB
 <pre>
 def csv_to_ravendb(csv_file, entity_class):<br>
@@ -128,6 +134,10 @@ def csv_to_ravendb(csv_file, entity_class):<br>
             except Exception as e:<br>
                 print(f"Error al subir el documento {entity.__dict__} a RavenDB: {e}")<br>
 </pre>
+<br>**Explicación:**
+<br>La función maneja excepciones y muestra mensajes de éxito o error en función de si la carga de datos en RavenDB se realizó correctamente o no.
+En resumen, esta función toma un archivo CSV, lee sus datos, crea objetos de una clase especificada y los almacena en una base de datos RavenDB utilizando una sesión.
+
 ### Archivo CSV y clase para los datos
 <pre>
 csv_file = 'final_train_output.csv'<br>
