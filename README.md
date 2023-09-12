@@ -180,11 +180,17 @@ if __name__ == "__main__":<br>
 
 ## Importar a SQL 
 1. Crear una base de datos
-2. CaRgar los archivos en la base de datos, es necesario conocer la ubicación del archivo en el escritorio.
-3. en la parte detareas seleccionamos la opción de importar datos segun el formato del archivo<br>![image](https://github.com/Miguel-Paredes/Proyecto_Final_Analisis/assets/117743828/2cfaa1b7-8941-4815-b91a-0186e2c6fa7b)
-4. Selecciono la base de datos donde quiero mostrar mi información del archivo<br>
+2. Cargar los archivos en la base de datos, es necesario conocer la ubicación del archivo en el escritorio.
+   - En la parte de tareas seleccionamos la opción de importar datos segun el formato del archivo (json,csv,excel)<br>![image](https://github.com/Miguel-Paredes/Proyecto_Final_Analisis/assets/117743828/2cfaa1b7-8941-4815-b91a-0186e2c6fa7b)
+   - Selecciono la base de datos donde quiero mostrar mi información del archivo<br>
 ![image](https://github.com/Miguel-Paredes/Proyecto_Final_Analisis/assets/117743828/c2db3063-4f47-46da-aca3-899f87e90ed7)
 
 ## Importar a PowerBI
+Seleccionar la opcion de importar base de datos y podemos seleccionar desde donde queremos importar
+<br>
+![image](https://github.com/Miguel-Paredes/Proyecto_Final_Analisis/assets/117743828/f6c06300-e07b-4ce7-980f-b2b97510a2db)
+<br>Escogemos la fuente de nuestros datos, pudoiendo ser desde la base SQL, archivos json, ssv, etc.
+## Conclusiones 
+
 
 
