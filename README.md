@@ -177,3 +177,14 @@ if __name__ == "__main__":<br>
 </pre>
 <br>**Explicación:**
 <br>Se tranfieren datos desde una base de datos RavenDB a una base de datos CouchDB, tomando objetos de una clase específica en RavenDB y almacenándolos en CouchDB después de formatearlos como diccionarios.
+
+## Importar a SQL 
+1. Crear una base de datos
+2. CaRgar los archivos en la base de datos, es necesario conocer la ubicación del archivo en el escritorio.
+3. en la parte detareas seleccionamos la opción de importar datos segun el formato del archivo<br>![image](https://github.com/Miguel-Paredes/Proyecto_Final_Analisis/assets/117743828/2cfaa1b7-8941-4815-b91a-0186e2c6fa7b)
+4. Selecciono la base de datos donde quiero mostrar mi información del archivo<br>
+![image](https://github.com/Miguel-Paredes/Proyecto_Final_Analisis/assets/117743828/c2db3063-4f47-46da-aca3-899f87e90ed7)
+
+## Importar a PowerBI
+
+
