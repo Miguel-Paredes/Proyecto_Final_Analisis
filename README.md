@@ -60,7 +60,8 @@ for documento in datos_json:<br>
 </pre> 
 <br>**Explicación:**
 <br>Establecemos conexión con CouchDB y generamos un nombre la Base donde almacenaremos los archivos json.
-<br>Con el "if" verificamos si ta existe una base de datos en Cocuh bajo ese nombre,en el caso de existir se le ordena que use esa base para guardar la información. Caso contrario entra el "else" que primero crea la base para luego cargar datos desde el archivo json seleccionado y agregar esos datos a la base de datos CouchDB como documentos individuales.
+<br>Con el "_if_" verificamos si ta existe una base de datos en Cocuh bajo ese nombre,en el caso de existir se le ordena que use esa base para guardar la información. Caso contrario entra el "_else_" que primero crea la base para luego cargar datos desde el archivo json seleccionado y agregar esos datos a la base de datos CouchDB como documentos individuales.
+
 ## Enviar los archivos Json a Mongodb
 <pre> 
 client = MongoClient('localhost', 27017)<br>
@@ -69,7 +70,14 @@ collection = db['covid_worldwide']<br>
 with open('covid_worldwide.json', 'r') as file:<br>
     data = json.load(file)<br>
 result = collection.insert_many(data)<br>
-</pre> 
+</pre>
+<br>**Explicación:**
+<br> Para conectrase a MongoDB se estable el usuario y el puerto que se utliza (el puerto ya viene gererado por defecto).
+<br>Hay que tener en cuenta que en MongoDB se trabaja con colecciones dentro de cada base, estas colecciones actuan como una clase dentro de la Base de datos, y las colecciones pueden crearse tantas como sean necesarias.
+<br>Para crear base de datos llamada "Analisis", debemos generar una colección llamada "covid_worldwide" en donde se alamacenrán nuestra información.
+<br> La cuarta línea de código se encarga de aprir el archivo en modo lectura y no hacer modificaciones esto garantiza que cada archivo leido se vaya almecenado  en nuestra colección, el objetivo de abrir en lectura es para que los archivos se guarden individualmente y no como un solo bloque, ya que hacerlos así, se pueden generar incoventientes al momento de viasualiasr la información en Mongo.
+<br>Finalmemte en "_insert_many_" insertará los múltiples documentos JSON leídos en la colección. 
+
 ## Enviar los archivos Json de Mongodb a Couchdb
 <pre> 
 client_mongodb = pymongo.MongoClient('localhost', 27017)<br>
@@ -83,6 +91,13 @@ for doc in documentos_mongodb:<br>
     del doc['_id'] #se elimina el id de mongo para que no entre en conflicto con el id de couchdb<br>
     db.save(doc)<br>
 </pre>
+<br>**Explicación:**
+1. Especificamos en cliente (usuario)  desde donde se enviará los datos de Mongo, de igual manera seleccionamos la Base de datos que contiene la colección donde se encuentran nuestros datos a envia.
+2.  Establecemos la ubicación del usuario quién recibe los datos desde Mongo; seleccionamos la Base de datos que contendrá la informacióncontiene la colección donde se encuentran nuestros datos a envia.
+3. _documentos_mongodb = coleccion_mongodb.find()_  Recupera todos los documentos de la colección en MongoDB utilizando el método find().
+4. 
+
+for doc in documentos_mongodb:: Inicia un bucle que itera a través de cada documento en la colección MongoDB.
 
 ## Enviar Json a Raven
 ### Configuración de RavenDB
