@@ -12,6 +12,11 @@ https://www.youtube.com/watch?v=vCOlyQrXaU4
 
 ## Enlace casos de estudio
 https://app.powerbi.com/groups/me/reports/da9174b8-daae-4f4b-8ebc-c324bb741555/ReportSection77dfc5e0673f4e73d361?experience=power-bi
+## Arquitectura de datos
+   ![image](https://github.com/Miguel-Paredes/Proyecto_Final_Analisis/assets/117743828/819da3fd-87ab-4985-88cc-9f87dd7b73fe)<br>
+   De las temáticas seleccionadas lo que se pretende es enviar algunos dataset hacia MongoDB,CocuchDB Y RavenDB, para leugo exportarlos hacia SQL server, que nos permitira tener una base sobre toda la información de nuestros dataset, con el fin de poder comprender la información generar casos de estudio.<br>
+   Cada caso tendrá una imagen, esta visulñaización se realiza en PowerBi que facilita la importación de los datos que ya se encuentran en SQL Server. De esta forma Y ano es necesario crear nuevamente tablas y llenarlas; asi optimizamos el tiempo.
+
 
 ## Librerias a utilizar
 <pre> 
