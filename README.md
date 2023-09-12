@@ -185,7 +185,7 @@ if __name__ == "__main__":<br>
    - Selecciono la base de datos donde quiero mostrar mi información del archivo<br>
 ![image](https://github.com/Miguel-Paredes/Proyecto_Final_Analisis/assets/117743828/c2db3063-4f47-46da-aca3-899f87e90ed7)
 
-3.Se pueden generar graficas de distintos modelos (barras, geograficos, puntos de dispersión), eso se puede modificar según las necesidades del caso de análisis.
+3. Se pueden generar graficas de distintos modelos (barras, geograficos, puntos de dispersión), eso se puede modificar según las necesidades del caso de análisis.
 ![image](https://github.com/Miguel-Paredes/Proyecto_Final_Analisis/assets/117743828/a91c2a41-b6bc-450c-98cc-1df30a9acae4)<br>
 ![image](https://github.com/Miguel-Paredes/Proyecto_Final_Analisis/assets/117743828/44cfd8a4-3ddf-4f73-948a-518d9aa38d6a)<br>
 ![image](https://github.com/Miguel-Paredes/Proyecto_Final_Analisis/assets/117743828/a79180e0-5e3b-46ff-82d1-cf96a82e2408)<br>
