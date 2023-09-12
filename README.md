@@ -42,7 +42,7 @@ csv_data = pd.read_csv("chat.csv", sep = ",")<br>
 csv_data.to_json("chat.json", orient = "records")<br>
 </pre>
 <br>**Explicación:**
-<br>La primera línea lee el archivo csv y los amacena temporalmente en la variable _a_.Esta variable es leída en la segunda línea, con el objetivo de separa los campos con una "_,_". Para finalemnte tomar el archivo csv y convertirlo en un archivo _json_, al cual le daremos un nombre.
+<br>La primera línea lee el archivo csv y los amacena temporalmente en la variable _a_. Esta variable es leída en la segunda línea, con el objetivo de separa los campos con una "_,_". Para finalemnte tomar el archivo csv y convertirlo en un archivo _json_, al cual le daremos un nombre.
 
 ## Enviar los archivos Json a Couchdb
 <pre>
@@ -58,6 +58,9 @@ with open(archivo_json) as archivo:<br>
 for documento in datos_json:<br>
     db.update([documento])<br>
 </pre> 
+<br>**Explicación:**
+<br>Establecemos conexión con CouchDB y generamos un nombre la Base donde almacenaremos los archivos json.
+<br>Con el "if" verificamos si ta existe una base de datos en Cocuh bajo ese nombre,en el caso de existir se le ordena que use esa base para guardar la información. Caso contrario entra el "else" que primero crea la base para luego cargar datos desde el archivo json seleccionado y agregar esos datos a la base de datos CouchDB como documentos individuales.
 ## Enviar los archivos Json a Mongodb
 <pre> 
 client = MongoClient('localhost', 27017)<br>
