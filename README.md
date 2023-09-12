@@ -21,6 +21,21 @@ from pymongo import MongoClient<br>
 from pyravendb.store import document_store<br>
 from couchdb import Server<br>
 </pre> 
+<br>Uso:
+# pandas:
+ Manipula y análiza de Datos 
+# json, os, csv:
+json trabaja con datos en formato JSON (JavaScript Object Notation),"os" proporciona funciones para interactuar con el sistema operativo, "csv" trabaja con archivos CSV (Comma-Separated Values), que son un formato común para el almacenamiento de datos tabulares
+# pymongo
+ Biblioteca para interactuar con bases de datos MongoDB
+# MongoClient
+Permite conectarte y trabajar con una base de datos MongoDB.
+# pyravendb.store,document_store
+Interactuar con bases de datos RavenDB, document_store sugiere que se está configurando un almacén de documentos para trabajar con RavenDB.
+# couchdb,Server
+ Interactua con bases de datos CouchDB,la clase Server especifica la biblioteca CouchDB que se utilizará para conectarse a un servidor CouchDB.
+
+
 ## Transformacion del CSV a Json
 <pre>   
 a = pd.read_csv('chat.csv')<br>
