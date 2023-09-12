@@ -143,10 +143,13 @@ En resumen, esta función toma un archivo CSV, lee sus datos, crea objetos de un
 csv_file = 'final_train_output.csv'<br>
 entity_class = Country<br>
 </pre>
+
 ### Cargar datos del CSV a RavenDB
 <pre>
 csv_to_ravendb(csv_file, entity_class)<br>
 </pre>
+<br>**Explicación:**
+<br>Tomamenos la difinicion de la clase (Clase Country), luego con el archivo csv ingresamos la los datos entro de cada campo que se generó en forma de diccionario para crear instancias de la clase a partir de las filas del CSV y cargar los datos en RavenDB de manera correcta.
 
 ## Transferir datos de RavenDB a CouchDB
 ### Configuración de CouchDB
@@ -156,6 +159,9 @@ database_name_couch = "olympics_medals_country_wise"<br>
 couch = couchdb.Server(couchdb_url)<br>
 couchdb_database = couch.get(database_name_couch, None) or couch.create(database_name_couch)<br>
 </pre>
+<br>**Explicación:**
+<br>Este código sirve conectar y trabajar con una base de datos CouchDB, para ob tener la base de datos con el nombre especificado usando elmétodo get(). Si la base de datos no existe (None), entonces se crea una nueva base de datos con ese nombre utilizando el método create(). El resultado se almacena en la variable "_couchdb_database_"
+
 ### Función para transferir datos de RavenDB a CouchDB
 <pre>
 def transfer_data_raven_to_couch(entity_class, couchdb_database):<br>
@@ -169,3 +175,5 @@ if __name__ == "__main__":<br>
     transfer_data_raven_to_couch(entity_class, couchdb_database)<br>
     print("Transferencia de datos completada.")<br>
 </pre>
+<br>**Explicación:**
+<br>Se tranfieren datos desde una base de datos RavenDB a una base de datos CouchDB, tomando objetos de una clase específica en RavenDB y almacenándolos en CouchDB después de formatearlos como diccionarios.
